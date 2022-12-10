@@ -1,0 +1,53 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                   http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="4" author="dhernandez">
+        <createTable tableName="partidos">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="usuario" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="local_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="visitante_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="goles_local" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="goles_visitante" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet  author="dhernandez"  id="5">
+        <addForeignKeyConstraint baseColumnNames="local_id"
+                                 constraintName="fk_equipo_local"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                 baseTableName="partidos"
+                                  referencedColumnNames="id"
+                                  referencedTableName="equipos"
+                                  />
+    </changeSet>
+    <changeSet  author="dhernandez"  id="6">
+        <addForeignKeyConstraint baseColumnNames="visitante_id"
+                                 constraintName="fk_equipo_visitante"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 baseTableName="partidos"
+                                 referencedColumnNames="id"
+                                 referencedTableName="equipos"
+        />
+    </changeSet>
+</databaseChangeLog>
