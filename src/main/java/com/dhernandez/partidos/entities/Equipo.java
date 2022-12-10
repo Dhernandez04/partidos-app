@@ -20,6 +20,6 @@ public class Equipo {
     @NotNull
     private String nombre;
 
-    @Column(name = "imagen")
-    private String imagen;
+    @Column(name = "escudo")
+    private String escudo;
 }
